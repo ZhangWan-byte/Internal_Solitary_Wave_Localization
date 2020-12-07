@@ -37,6 +37,6 @@ Under the error of ±5 pixels, the highest localization accuracy is 97%.
 - When adjusting the error boundary to ±3 pixels, the localization accuracy is 95%.
 - CNN model consists of 5 conv layers (conv+bn+maxpooling) and 3 FC layers, with single node top layer outputing the probability.
 
-# TODO
+# --TODO
 - Model experimeents.
 - Global remote sensing data analysis.
