@@ -6,13 +6,13 @@ Remote sensing data from instruments on satellite, containing a number of variab
 
 ## Results
 
-:Model:|:Acc:|:MSE/MAE:
-:RF:|:89.4:|:TODO:
-:XGBoost:|:91.6:|:3.56/0.72:
-:LightGBM:|:90.6:|:3.80/0.77:
-:NN:|:90.5:|:TODO:
-:ResNet50:|:\:|:TODO:
-:VGG16:|:\:|:TODO:
+|:Model:|:Acc:|:MSE/MAE:|
+|:RF:|:89.4:|:TODO:|
+|:XGBoost:|:91.6:|:3.56/0.72:|
+|:LightGBM:|:90.6:|:3.80/0.77:|
+|:NN:|:90.5:|:TODO:|
+|:ResNet50:|:\:|:TODO:|
+|:VGG16:|:\:|:TODO:|
 
 # Methodology
 ## Classification
