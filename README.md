@@ -6,7 +6,7 @@ Remote sensing data from instruments on satellite, containing a number of variab
 
 ## Results
 
-|  Model   | Accuracy |  MSE / MAE  |
+|  Model   | Classification (Acc) |  Localization (MSE / MAE)  |
 | :------: | :------: | :---------: |
 |   :RF:   |   89.4   |    TODO     |
 | XGBoost  |   91.6   | 3.56 / 0.72 |
