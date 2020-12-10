@@ -1,3 +1,5 @@
+Updating--
+
 # InnerWave
 An ongoing project focusing on Inner Wave Detection and Localization
 
@@ -8,7 +10,7 @@ Remote sensing data from instruments on satellite, containing a number of variab
 
 |  Model   | Classification (Acc) |  Localization (MSE / MAE)  |
 | :------: | :------: | :---------: |
-|   :RF:   |   89.4   |    TODO     |
+|   RF     |   89.4   |    TODO     |
 | XGBoost  |   91.6   | 3.56 / 0.72 |
 | LightGBM |   90.6   | 3.80 / 0.77 |
 |    CNN   |   90.5   |    TODO     |
