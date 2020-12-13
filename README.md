@@ -4,7 +4,7 @@ Updating--
 An ongoing project focusing on Inner Wave Detection and Localization
 
 # Data
-Remote sensing data from instruments on satellite, containing a number of variables. In total 8 variables including longitude and latitude are selected manually.
+Remote sensing data from instruments on satellite, containing a number of variables. In total 8 variables including longitude and latitude are selected manually with expertise knowledge and experiments of literatures.
 
 ## Results
 
