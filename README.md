@@ -10,8 +10,8 @@ Remote sensing data from instruments on satellite, containing a number of variab
 
 |  Model   | Classification (Acc) |  Localization ±5pixels (Acc)  |  Localization ±3pixels (Acc)  |
 | :------: | :------: | :---------: | :---------: |
-|    RF    |   89.4   |    96.76    |    TODO     |
-| XGBoost  |   91.6   |    96.95    |    TODO     |
+|    RF    |   89.4   |    96.76    |    93.03    |
+| XGBoost  |   91.6   |    96.95    |    94.53    |
 | LightGBM |   90.6   |    97.15    |    94.69    |
 |    CNN   |   90.5   |    TODO     |    TODO     |
 | ResNet50 |    \     |    TODO     |    TODO     |
@@ -20,10 +20,9 @@ Remote sensing data from instruments on satellite, containing a number of variab
 
 
 
-
 # Methodology
 
-Train models on training set (80%), test on testing set (20%). Run 10 times and get the average.
+Train models on training set (80%), test on testing set (20%). Run 100 times and get the average, except for RF with 10 times.
 
 ## Classification
 Data in 8*32 with 8 variables and a window containing 32 data points. In total 3340 pieces.
