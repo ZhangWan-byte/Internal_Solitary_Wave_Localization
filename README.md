@@ -10,9 +10,9 @@ Remote sensing data from instruments on satellite, containing a number of variab
 
 |  Model   | Classification (Acc) |  Localization ±5pixels (Acc)  |  Localization ±3pixels (Acc)  |
 | :------: | :------: | :---------: | :---------: |
-|    RF    |   89.4   |    96.76    |    93.03    |
-| XGBoost  |   91.6   |    96.95    |    94.53    |
-| LightGBM |   90.6   |    97.15    |    94.69    |
+|    RF    |   89.4   |    TODO     |    TODO     |
+| XGBoost  |   91.6   |    TODO     |    TODO     |
+| LightGBM |   90.6   |    TODO     |    TODO     |
 |    CNN   |   90.5   |    TODO     |    TODO     |
 | ResNet50 |    \     |    TODO     |    TODO     |
 |  VGG16   |    \     |    TODO     |    TODO     |
