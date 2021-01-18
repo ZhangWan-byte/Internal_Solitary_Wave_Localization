@@ -14,7 +14,7 @@ Remote sensing data from instruments on satellite, containing a number of variab
 | XGBoost  |   91.6   |    TODO     |    TODO     |
 | LightGBM |   90.6   |    TODO     |    TODO     |
 |    CNN   |   90.5   |    TODO     |    TODO     |
-| ResNet50 |    \     |    TODO     |    TODO     |
+| ResNet50 |    \     |    96.1     |    TODO     |
 |  VGG16   |    \     |    TODO     |    TODO     |
 
 
