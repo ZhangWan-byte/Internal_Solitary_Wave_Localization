@@ -44,4 +44,5 @@ Under the error of ±5 pixels, the highest localization accuracy is 97%.
 
 # References
 [1] Srinivas, Aravind, et al. "Bottleneck Transformers for Visual Recognition." arXiv preprint arXiv:2101.11605 (2021).
+
 [2] He, Kaiming, et al. "Deep residual learning for image recognition." Proceedings of the IEEE conference on computer vision and pattern recognition. 2016.
