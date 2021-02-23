@@ -15,7 +15,7 @@ Remote sensing data from instruments on satellite, containing a number of variab
 | LightGBM |   90.6   |    TODO     |    TODO     |
 |    CNN   |   90.5   |    TODO     |    TODO     |
 | ResNet50 |    \     |    96.1     |    TODO     |
-|  VGG16   |    \     |    TODO     |    TODO     |
+|  BoTNet  |    \     |    95.8     |    96.3     |
 
 
 
@@ -39,5 +39,5 @@ Under the error of ±5 pixels, the highest localization accuracy is 97%.
 - CNN model consists of 5 conv layers (conv+bn+maxpooling) and 3 FC layers, with single node top layer outputing the probability.
 
 # --TODO
-- Model experimeents.
-- Global remote sensing data analysis.
+- Model optimisation: Few-shot Learning, Data Augmentation.
+- Global Inner Wave analysis.
