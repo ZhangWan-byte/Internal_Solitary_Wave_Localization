@@ -31,3 +31,13 @@ training_testing.py:
 - lr
 - epoch
 - batch_size
+
+## Reference
+- Pretraining codes utilises an open-sourced SimCLR library: 
+  
+  https://github.com/Spijkervet/SimCLR
+- ResNet codes utilises following implementations: 
+
+  https://github.com/leaderj1001/BottleneckTransformers/blob/main/model.py
+  
+  https://github.com/kuangliu/pytorch-cifar/blob/master/models/resnet.py
