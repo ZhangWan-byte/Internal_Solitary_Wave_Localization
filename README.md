@@ -23,7 +23,16 @@ data_process.py
 - oversampling: ""/"oversample"/"SMOTE"/"BorderlineSMOTE"/"ADASYN"
 
 
-training_testing.py:
+pretraining.py
+- epochs
+- batch_size
+- lr
+- temperature
+- projection_dim
+- n_features
+
+
+training_testing.py
 - model_name: "RF"/"LGB"/"MLP"/"ResNet"/"BoTNet"
 - data_shape: "1x96"/"16x16x1"
 - oversampling: ""/"oversample"/"SMOTE"/"BorderlineSMOTE"/"ADASYN"
