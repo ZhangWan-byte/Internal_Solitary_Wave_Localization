@@ -4,6 +4,17 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 
+
+def get_n_params(model):
+    pp=0
+    for p in list(model.parameters()):
+        nn=1
+        for s in list(p.size()):
+            nn = nn*s
+        pp += nn
+    return pp
+
+
 class MLP(nn.Module):
     def __init__(self, num_class, input_length=96, dropout=0):
         super(MLP, self).__init__()
@@ -23,16 +34,6 @@ class MLP(nn.Module):
         x = self.mlp(x)
         
         return x
-    
-    
-def get_n_params(model):
-    pp=0
-    for p in list(model.parameters()):
-        nn=1
-        for s in list(p.size()):
-            nn = nn*s
-        pp += nn
-    return pp
 
 
 # reference
@@ -110,7 +111,7 @@ class Bottleneck(nn.Module):
 # reference
 # https://github.com/kuangliu/pytorch-cifar/blob/master/models/resnet.py
 class ResNet(nn.Module):
-    def __init__(self, block, num_blocks, num_classes=1000, resolution=(224, 224), heads=4, is_botnet=False):
+    def __init__(self, block, num_blocks, num_classes=1000, resolution=(224, 224), is_botnet=False, heads=4):
         super(ResNet, self).__init__()
         self.in_planes = 64
         self.resolution = list(resolution)
@@ -167,11 +168,13 @@ class ResNet(nn.Module):
         return out
 
 
-def ResNet50(num_classes=17, resolution=(16, 16), heads=4):
-    return ResNet(Bottleneck, [3, 4, 6, 3], num_classes=num_classes, resolution=resolution, heads=heads, is_botnet=False)
+def get_ResNet(num_blocks=[3, 4, 6, 3], num_classes=17, resolution=(16, 16)):
+    return ResNet(block=Bottleneck, num_blocks=num_blocks, num_classes=num_classes, resolution=resolution, is_botnet=False)
 
-def BoTNet50(num_classes=17, resolution=(16, 16), heads=4):
-    return ResNet(Bottleneck, [3, 4, 6, 3], num_classes=num_classes, resolution=resolution, heads=heads, is_botnet=True)
+
+def get_BoTNet(num_blocks=[3, 4, 6, 3], num_classes=17, resolution=(16, 16), heads=4):
+    return ResNet(block=Bottleneck, num_blocks=num_blocks, num_classes=num_classes, resolution=resolution, is_botnet=True, heads=heads)
+
 
 class ResNet_simclr(nn.Module):
     def __init__(self, encoder, num_classes=17):
