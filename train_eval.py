@@ -37,7 +37,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         elif model_name == "OneDCNN":
             model = OneDCNN(n_channels=64, hidden=128, n_classes=17).to(device)
         elif model_name == "EquiOneDCNN":
-            model = EquiOneDCNN(n_channels=32, hidden=128, n_classes=17).to(device)
+            model = EquiOneDCNN(n_channels=128, hidden=128, n_classes=17).to(device)
     else:
         pretrain_model = torch.load(pretrain_path)
         model = ResNet_simclr(encoder=pretrain_model.encoder, num_classes=17).to(device)
