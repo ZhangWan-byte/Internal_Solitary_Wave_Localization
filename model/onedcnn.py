@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+import eerie
 
 class OneDCNN(torch.nn.Module):
     def __init__(self, n_channels=16, hidden=16, n_classes=17, eps=2e-5, use_bias=False, dp_rate=0.25):
