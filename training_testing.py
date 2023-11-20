@@ -145,7 +145,7 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 # kfold_training(model_name="MLP", oversampling="SMOTE", data_shape="1x96")
 # kfold_training(model_name="ResNet", oversampling="", data_shape="16x16x1", lr=3e-4, epoch=400)
 kfold_training(model_name="OneDCNN", oversampling="", data_shape="6x16", lr=3e-4, epoch=400)
-kfold_training(model_name="EquiOneDCNN", oversampling="", data_shape="6x16", lr=3e-4, epoch=400)
+# kfold_training(model_name="EquiOneDCNN", oversampling="", data_shape="6x16", lr=3e-4, epoch=400)
 
 # Using pre-training
 # kfold_training(model_name="BoTNet", oversampling="", data_shape='16x16x1', loss_func="FocalLoss", lr=6e-4, epoch=400, pretrain_path="./models/SimCLR_BoTNet_southSea_batch1024_proj64_tao100_lr1e-3_10epoch.pt", batch_size=128)

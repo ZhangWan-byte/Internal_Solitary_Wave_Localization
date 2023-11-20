@@ -12,7 +12,11 @@ from loss_func import *
 def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=400, model_name="MLP", loss_func="CE", gamma=2, input_length=96, dropout=0, path="", pretrain_path=None):
     
     # dataloader
-    alter_channel=False if model_name=="MLP" else True
+    if model_name in ["MLP", "OneDCNN", "EquiOneDCNN"]:
+        alter_channel = False
+    else:
+        alter_channel = True
+
     train = myDataset(X_train, y_train, alter_channel=alter_channel)
     train_loader = torch.utils.data.DataLoader(dataset = train, batch_size = batch_size)
     val = myDataset(X_val, y_val, alter_channel=alter_channel)
@@ -77,7 +81,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         for data in train_loader:
             X, y = data
             X, y = Variable(X), Variable(y)
-            X, y = X.to(torch.float64), y.to(torch.float64)
+            X, y = X.to(torch.float32), y.to(torch.float32)
             X, y = X.to(device), y.to(device)
             optimizer.zero_grad()
             y_pred = model(X)
@@ -93,7 +97,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         for data, target in val_loader:
             with torch.no_grad():
                 data, target = Variable(data),Variable(target)
-                data, target = data.to(device).to(torch.float64), target.to(device).to(torch.float64)
+                data, target = data.to(device).to(torch.float32), target.to(device).to(torch.float32)
                 output = model(data)
             y_pred.append(output.cpu().numpy())
             val_loss += criterion(output, target).data.item()
@@ -104,7 +108,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         gmean = imblearn.metrics.geometric_mean_score(y_pred=y_pred, y_true=y_val, average='macro')
 
         if gmean > max_gmean:
-            torch.save(model, ".{}/models/{}".format(path, model_name))
+            torch.save(model, "./results/{}".format(model_name))
             max_gmean = gmean
             best_epoch = epoch
 
@@ -142,7 +146,7 @@ def evaluating(history_train_loss, history_val_loss, X_test, y_test, model_path=
     for data, target in test_loader:
         with torch.no_grad():
             data, target = Variable(data),Variable(target)
-            data, target = data.to(device).to(torch.float64), target.to(device).to(torch.float64)
+            data, target = data.to(device).to(torch.float32), target.to(device).to(torch.float32)
             output = model(data)
         y_pred.append(output.cpu().numpy())
 
