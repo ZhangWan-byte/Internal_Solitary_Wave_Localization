@@ -119,7 +119,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
     return history_train_loss, history_val_loss
 
 
-def evaluating(history_train_loss, history_val_loss, X_test, y_test, model_path="./models/MLP", batch_size=1024, epochs=50, model_name="MLP", is_kfold=False, oversampling="", i=0, loss_func="CE"):
+def evaluating(history_train_loss, history_val_loss, X_test, y_test, model_path="./results/OneDCNN.pt", batch_size=1024, epochs=50, model_name="MLP", is_kfold=False, oversampling="", i=0, loss_func="CE"):
     if history_train_loss!=None and history_val_loss!=None:
         plt.title("loss curve")
         plt.plot(np.arange(epochs), history_train_loss)

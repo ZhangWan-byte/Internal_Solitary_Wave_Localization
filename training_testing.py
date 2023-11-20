@@ -54,35 +54,35 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
             elif model_name=="MLP":
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
-                    batch_size=batch_size, lr=lr, epochs=200, model_name="MLP", 
+                    batch_size=batch_size, lr=lr, epochs=200, model_name=model_name, 
                     loss_func=loss_func)
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
-                    model_path="./results/MLP", batch_size=batch_size, epochs=200, 
-                    model_name="MLP", is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
+                    model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=200, 
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
             elif model_name=="ResNet":
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
-                    batch_size=batch_size, lr=lr, epochs=epoch, model_name="ResNet", 
+                    batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
                     loss_func=loss_func, pretrain_path=pretrain_path)
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
-                    model_path="./results/ResNet", batch_size=batch_size, epochs=epoch, 
-                    model_name="ResNet", is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
+                    model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
             elif model_name=="BoTNet":
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
-                    batch_size=batch_size, lr=lr, epochs=epoch, model_name="BoTNet", 
+                    batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
                     loss_func=loss_func, pretrain_path=pretrain_path)
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
-                    model_path="./results/BoTNet", batch_size=batch_size, epochs=epoch, 
-                    model_name="BoTNet", is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
+                    model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
             elif model_name=="ResNet_pretrain":
                 pass
@@ -92,24 +92,24 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
             elif model_name=="OneDCNN":
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
-                    batch_size=batch_size, lr=lr, epochs=epoch, model_name="OneDCNN", 
+                    batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
                     loss_func=loss_func, pretrain_path=pretrain_path)
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
-                    model_path="./results/OneDCNN", batch_size=batch_size, epochs=epoch, 
-                    model_name="OneDCNN", is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
+                    model_path="./results/{}.pt".format(OneDCNN), batch_size=batch_size, epochs=epoch, 
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
             elif model_name=="EquiOneDCNN":
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
-                    batch_size=batch_size, lr=lr, epochs=epoch, model_name="EquiOneDCNN", 
+                    batch_size=batch_size, lr=lr, epochs=epoch, model_name=OneDCNN, 
                     loss_func=loss_func, pretrain_path=pretrain_path)
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
-                    model_path="./results/EquiOneDCNN", batch_size=batch_size, epochs=epoch, 
-                    model_name="EquiOneDCNN", is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
+                    model_path="./results/{}.pt".format(OneDCNN), batch_size=batch_size, epochs=epoch, 
+                    model_name=OneDCNN, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
             metric_li.append(metric_kfold(y_pred, y_test, model_name=model_name, i=i, oversampling=oversampling))
             print(metric_li[-1])
