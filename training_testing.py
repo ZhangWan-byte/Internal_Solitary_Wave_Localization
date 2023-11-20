@@ -97,19 +97,19 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
-                    model_path="./results/{}.pt".format(OneDCNN), batch_size=batch_size, epochs=epoch, 
+                    model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
                     model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
             elif model_name=="EquiOneDCNN":
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
-                    batch_size=batch_size, lr=lr, epochs=epoch, model_name=OneDCNN, 
+                    batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
                     loss_func=loss_func, pretrain_path=pretrain_path)
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
-                    model_path="./results/{}.pt".format(OneDCNN), batch_size=batch_size, epochs=epoch, 
-                    model_name=OneDCNN, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
+                    model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
             metric_li.append(metric_kfold(y_pred, y_test, model_name=model_name, i=i, oversampling=oversampling))
             print(metric_li[-1])

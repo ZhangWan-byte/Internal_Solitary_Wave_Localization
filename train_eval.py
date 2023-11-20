@@ -135,7 +135,11 @@ def evaluating(history_train_loss, history_val_loss, X_test, y_test, model_path=
     
     device = torch.device("cuda")
     
-    alter_channel=False if model_name=="MLP" else True
+    if model_name in ["MLP", "OneDCNN", "EquiOneDCNN"]:
+        alter_channel = False
+    else:
+        alter_channel = True
+        
     test = myDataset(X_test, y_test, alter_channel=alter_channel)
     test_loader = torch.utils.data.DataLoader(dataset = test, batch_size = batch_size)
     
