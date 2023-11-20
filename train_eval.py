@@ -108,7 +108,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         gmean = imblearn.metrics.geometric_mean_score(y_pred=y_pred, y_true=y_val, average='macro')
 
         if gmean > max_gmean:
-            torch.save(model, "./results/{}".format(model_name))
+            torch.save(model, "./results/{}.pt".format(model_name))
             max_gmean = gmean
             best_epoch = epoch
 
