@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import RandomOverSampler, SMOTE, BorderlineSMOTE, ADASYN
 
 # slice (n,96) data into (m,16x16x1)
-def to_size_16(X_train):
+def to_size_16x16(X_train):
     Z = np.zeros((16,10))
 
     temp_li = []
@@ -23,6 +23,20 @@ def to_size_16(X_train):
         temp_li.append(temp)
     X_train = np.stack(temp_li,axis=0)
     
+    return X_train
+
+# slice (n,96) data into (m,6x16)
+def to_size_6x16(X_train):
+    
+    temp_li = []
+    for i in range(int(X_train.shape[0])):
+        temp = np.array(X_train.iloc[i, :])
+        temp = temp.reshape(16, 6)
+        temp_li.append(temp)
+    X_train = np.stack(temp_li,axis=0)
+    
+    X_train = X_train.transpose(0, 2, 1)             # (batch, 16, 6) -> (batch, 6, 16) each row is a feature variable
+
     return X_train
 
 
@@ -91,7 +105,7 @@ def global_data_generation(data_path, is_augment=False, only_south_sea=True):
         temp_li.append(temp)
         data = data.iloc[16:, :]
     data = np.stack(temp_li,axis=0)
-    data = to_size_16(pd.DataFrame(data))  
+    data = to_size_16x16(pd.DataFrame(data))  
         
     print(data.shape)
 
@@ -215,8 +229,12 @@ def kfold_load_process_save_data(data_path, label_path, is_augment=False, data_s
 
             # reshape to 16x16x1 if needed
             if data_shape=='16x16x1':
-                X_train = to_size_16(X_train)
-                X_test = to_size_16(X_test)
+                X_train = to_size_16x16(X_train)
+                X_test = to_size_16x16(X_test)
+
+            if data_shape=='6x16':
+                X_train = to_size_6x16(X_train)
+                X_test = to_size_6x16(X_test)
 
             # oversampling techniques
             if oversampling!="":
@@ -246,17 +264,18 @@ def kfold_load_process_save_data(data_path, label_path, is_augment=False, data_s
             np.save("./data/"+str(kfold)+"fold/"+data_shape+"/T"+str(t)+"_fold"+str(i)+"_"+is_oversampling+"_y_test"+is_augment, y_test)
 
 
-# generating dataset 
-data_path="./data/Trainingdata_WS_Month_1.0/inputs/"
-label_path="./data/Trainingdata_WS_Month_1.0/labels/"
+if __name__ == "__main__":
+    # generating dataset 
+    data_path="./data/Trainingdata_WS_Month_1.0/inputs/"
+    label_path="./data/Trainingdata_WS_Month_1.0/labels/"
 
-data_shape = ["1x96", "16x16x1"]
-oversampling = ["", "oversample", "SMOTE", "BorderlineSMOTE", "ADASYN"]
+    data_shape = ["1x96", "16x16x1", "6x16"]
+    oversampling = ["", "oversample", "SMOTE", "BorderlineSMOTE", "ADASYN"]
 
-for i in data_shape:
-    for j in oversampling:
-        kfold_load_process_save_data(data_path, label_path, is_augment=False, data_shape=i, oversampling=j, kfold=2, times=5)
+    for i in data_shape:
+        for j in oversampling:
+            kfold_load_process_save_data(data_path, label_path, is_augment=False, data_shape=i, oversampling=j, kfold=2, times=5)
 
-# generating pretraining dataset 
-# path_data = "D:/Inner_Wave/version1.0/Testingdata_global_1.0/"
-# global_data_generation(path_data, is_augment=False, only_south_sea=True)
+    # generating pretraining dataset 
+    # path_data = "D:/Inner_Wave/version1.0/Testingdata_global_1.0/"
+    # global_data_generation(path_data, is_augment=False, only_south_sea=True)

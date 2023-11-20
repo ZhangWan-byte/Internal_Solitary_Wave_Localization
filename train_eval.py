@@ -21,7 +21,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
     device = torch.device("cuda")
 
     # model
-    assert model_name in ["MLP", "ResNet", "BoTNet"]
+    assert model_name in ["MLP", "ResNet", "BoTNet", "OneDCNN", "EquiOneDCNN"]
     
     if pretrain_path==None:
         if model_name == "MLP":
@@ -30,6 +30,10 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
             model = ResNet50(num_classes=17, resolution=(16, 16), heads=4).to(device)
         elif model_name == "BoTNet":
             model = BoTNet50(num_classes=17, resolution=(16, 16), heads=4).to(device)
+        elif model_name == "OneDCNN":
+            model = OneDCNN(n_channels=64, hidden=128, n_classes=17).to(device)
+        elif model_name == "EquiOneDCNN":
+            model = EquiOneDCNN(n_channels=32, hidden=128, n_classes=17).to(device)
     else:
         pretrain_model = torch.load(pretrain_path)
         model = ResNet_simclr(encoder=pretrain_model.encoder, num_classes=17).to(device)
@@ -73,7 +77,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         for data in train_loader:
             X, y = data
             X, y = Variable(X), Variable(y)
-            X, y = X.to(torch.float32), y.to(torch.float32)
+            X, y = X.to(torch.float64), y.to(torch.float64)
             X, y = X.to(device), y.to(device)
             optimizer.zero_grad()
             y_pred = model(X)
@@ -89,7 +93,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         for data, target in val_loader:
             with torch.no_grad():
                 data, target = Variable(data),Variable(target)
-                data, target = data.to(device).to(torch.float32), target.to(device).to(torch.float32)
+                data, target = data.to(device).to(torch.float64), target.to(device).to(torch.float64)
                 output = model(data)
             y_pred.append(output.cpu().numpy())
             val_loss += criterion(output, target).data.item()
@@ -138,7 +142,7 @@ def evaluating(history_train_loss, history_val_loss, X_test, y_test, model_path=
     for data, target in test_loader:
         with torch.no_grad():
             data, target = Variable(data),Variable(target)
-            data, target = data.to(device).to(torch.float32), target.to(device).to(torch.float32)
+            data, target = data.to(device).to(torch.float64), target.to(device).to(torch.float64)
             output = model(data)
         y_pred.append(output.cpu().numpy())
 
