@@ -12,7 +12,7 @@ from loss_func import *
 def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=400, model_name="MLP", loss_func="CE", gamma=2, input_length=96, dropout=0, path="", pretrain_path=None):
     
     # dataloader
-    if model_name in ["MLP", "OneDCNN", "EquiOneDCNN"]:
+    if model_name in ["MLP", "OneDCNN", "EquiOneDCNN", "EquiResNet"]:
         alter_channel = False
     else:
         alter_channel = True
@@ -39,7 +39,10 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         elif model_name == "EquiOneDCNN":
             model = EquiOneDCNN(n_channels=128, hidden=128, n_classes=17).to(device)
         elif model_name == "EquiResNet":
-            model = 
+            model = RRPlus_M34res(n_channels=48, n_classes=17, eps=2e-5, use_bias=False).to(device)
+        else:
+            print("something wrong happened!")
+            exit()
     else:
         pretrain_model = torch.load(pretrain_path)
         model = ResNet_simclr(encoder=pretrain_model.encoder, num_classes=17).to(device)

@@ -78,7 +78,9 @@ class RRPlus_M34res(torch.nn.Module):
     def __init__(self, n_channels=48, n_classes=10, eps=2e-5, use_bias=False):
         super(RRPlus_M34res, self).__init__()
 
-        # # G-conv approach
+        self.n_classes = n_classes
+
+        # G-conv approach
         group = eerie.Group('R1R+')
 
         # For first layer:
@@ -229,5 +231,5 @@ class RRPlus_M34res(torch.nn.Module):
         # print("5 ", out.shape)
         # Then turn into features per time point (merging scale and the channel axes)
         out = torch.max(out, dim=-2).values  # pool over the scale axis
-        out = out.view(out.size(0), 10)
+        out = out.view(out.size(0), self.n_classes)
         return out
