@@ -111,7 +111,7 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
                     model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
                     model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
-            elif model_name=="EquiResNets":
+            elif model_name=="EquiResNet":
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
                     batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
