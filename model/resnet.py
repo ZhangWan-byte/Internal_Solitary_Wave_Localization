@@ -111,12 +111,12 @@ class Bottleneck(nn.Module):
 # reference
 # https://github.com/kuangliu/pytorch-cifar/blob/master/models/resnet.py
 class ResNet(nn.Module):
-    def __init__(self, block, num_blocks, num_classes=1000, resolution=(224, 224), is_botnet=False, heads=4):
+    def __init__(self, block, num_blocks, num_classes=1000, resolution=(224, 224), heads=4, is_botnet=False):
         super(ResNet, self).__init__()
         self.in_planes = 64
         self.resolution = list(resolution)
 
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False)
+        self.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
         if self.conv1.stride[0] == 2:
             self.resolution[0] /= 2
         if self.conv1.stride[1] == 2:

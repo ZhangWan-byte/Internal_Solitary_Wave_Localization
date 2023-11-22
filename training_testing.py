@@ -108,24 +108,34 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 
 # code demos are as following:
 
-# RF/LGB models
+
+# 1. RF/LGB models
+
 # kfold_training(model_name="RF", oversampling="", data_shape="1x96")
 # kfold_training(model_name="RF", oversampling="oversample", data_shape="1x96")
 
-# Neural Network models
+
+# 2. Neural Network models
+
 # kfold_training(model_name="MLP", oversampling="", data_shape="1x96")
 # kfold_training(model_name="MLP", oversampling="SMOTE", data_shape="1x96")
-# kfold_training(model_name="ResNet", oversampling="", data_shape="16x16x1", lr=3e-4, epoch=400)
+
+kfold_training(
+    model_name="ResNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
+
 # kfold_training(
 #     model_name="OneDCNN", oversampling="", data_shape="6x16", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
+
 # kfold_training(
 #     model_name="EquiOneDCNN", oversampling="", data_shape="6x16", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
 
 # kfold_training(
 #     model_name="EquiResNet", oversampling="", data_shape="6x16", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
-kfold_training(
-    model_name="ConvNeXt", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
+# kfold_training(
+#     model_name="ConvNeXt", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
-# Using pre-training
+
+# 3. Using pre-training
+
 # kfold_training(model_name="BoTNet", oversampling="", data_shape='16x16x1', loss_func="FocalLoss", lr=6e-4, epoch=400, pretrain_path="./results/SimCLR_BoTNet_southSea_batch1024_proj64_tao100_lr1e-3_10epoch.pt", batch_size=128)
