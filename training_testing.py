@@ -111,6 +111,21 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
                     model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
                     model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
 
+            elif model_name=="EquiResNets":
+                history_train_loss, history_val_loss = training(
+                    X_train, y_train, X_test, y_test, 
+                    batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
+                    loss_func=loss_func, pretrain_path=pretrain_path)
+
+                y_pred = evaluating(
+                    history_train_loss, history_val_loss, X_test, y_test, 
+                    model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func="CE")
+
+            else:
+                print("wrong model_name!")
+                exit()
+
             metric_li.append(metric_kfold(y_pred, y_test, model_name=model_name, i=i, oversampling=oversampling))
             print(metric_li[-1])
 
@@ -146,8 +161,11 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 # kfold_training(model_name="ResNet", oversampling="", data_shape="16x16x1", lr=3e-4, epoch=400)
 # kfold_training(
 #     model_name="OneDCNN", oversampling="", data_shape="6x16", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
+# kfold_training(
+#     model_name="EquiOneDCNN", oversampling="", data_shape="6x16", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
+
 kfold_training(
-    model_name="EquiOneDCNN", oversampling="", data_shape="6x16", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
+    model_name="EquiResNet", oversampling="", data_shape="6x16", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
 # Using pre-training
 # kfold_training(model_name="BoTNet", oversampling="", data_shape='16x16x1', loss_func="FocalLoss", lr=6e-4, epoch=400, pretrain_path="./results/SimCLR_BoTNet_southSea_batch1024_proj64_tao100_lr1e-3_10epoch.pt", batch_size=128)
