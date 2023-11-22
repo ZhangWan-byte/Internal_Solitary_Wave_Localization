@@ -70,8 +70,9 @@ class myDataset(torch.utils.data.Dataset):
             if self.is_global_test==False:
                 X, y = self.data[index], self.label[index]
                 if self.alter_channel == True:
-                    X = X.reshape(1,16,16)
-                    X = np.vstack([X,X,X])
+                    # X = X.reshape(1,16,16)
+                    X = X.permute(2, 0, 1) # (16, 16, 1) -> (1, 16, 16)
+                    # X = np.vstack([X,X,X])
                 y_li = [0]*17
                 y_li[int(y.numpy())]=1
                 return X, torch.tensor(y_li)
@@ -85,8 +86,9 @@ class myDataset(torch.utils.data.Dataset):
             else:
                 X = self.data[index]
                 if self.alter_channel == True:
-                    X = X.reshape(1,16,16)
-                    X = np.vstack([X,X,X])
+                    # X = X.reshape(1,16,16)
+                    X = X.permute(2, 0, 1) # (16, 16, 1) -> (1, 16, 16)
+                    # X = np.vstack([X,X,X])
                     # X = torch.tensor(X).to(torch.float32)
                 return self.transform(X), self.transform(X)
             

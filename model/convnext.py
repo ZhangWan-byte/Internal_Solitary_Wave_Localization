@@ -51,6 +51,7 @@ class Block(nn.Module):
         x = input + self.drop_path(x)
         return x
 
+
 class ConvNeXt(nn.Module):
     r""" ConvNeXt
         A PyTorch impl of : `A ConvNet for the 2020s`  -
@@ -78,9 +79,10 @@ class ConvNeXt(nn.Module):
         )
         self.downsample_layers.append(stem)
         for i in range(3):
+            # nn.Conv2d strid: 2 -> 1
             downsample_layer = nn.Sequential(
                     LayerNorm(dims[i], eps=1e-6, data_format="channels_first"),
-                    nn.Conv2d(dims[i], dims[i+1], kernel_size=2, stride=2),
+                    nn.Conv2d(dims[i], dims[i+1], kernel_size=2, stride=1),
             )
             self.downsample_layers.append(downsample_layer)
 
@@ -109,14 +111,18 @@ class ConvNeXt(nn.Module):
 
     def forward_features(self, x):
         for i in range(4):
+            # print(i, x.shape)
             x = self.downsample_layers[i](x)
+            # print(i, x.shape)
             x = self.stages[i](x)
+            # print(i, x.shape)
         return self.norm(x.mean([-2, -1])) # global average pooling, (N, C, H, W) -> (N, C)
 
     def forward(self, x):
         x = self.forward_features(x)
         x = self.head(x)
         return x
+
 
 class LayerNorm(nn.Module):
     r""" LayerNorm that supports two data formats: channels_last (default) or channels_first. 
@@ -157,14 +163,14 @@ class LayerNorm(nn.Module):
 #     "convnext_xlarge_22k": "https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_224.pth",
 # }
 
-@register_model
-def convnext_tiny(pretrained=False, in_22k=False, **kwargs):
-    model = ConvNeXt(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
-    if pretrained:
-        url = model_urls['convnext_tiny_22k'] if in_22k else model_urls['convnext_tiny_1k']
-        checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu", check_hash=True)
-        model.load_state_dict(checkpoint["model"])
-    return model
+# @register_model
+# def convnext_tiny(pretrained=False, in_22k=False, **kwargs):
+#     model = ConvNeXt(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
+#     if pretrained:
+#         url = model_urls['convnext_tiny_22k'] if in_22k else model_urls['convnext_tiny_1k']
+#         checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu", check_hash=True)
+#         model.load_state_dict(checkpoint["model"])
+#     return model
 
 # @register_model
 # def convnext_small(pretrained=False,in_22k=False, **kwargs):
