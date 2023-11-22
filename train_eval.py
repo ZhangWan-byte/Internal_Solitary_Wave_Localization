@@ -140,7 +140,7 @@ def evaluating(history_train_loss, history_val_loss, X_test, y_test, model_path=
     
     device = torch.device("cuda")
     
-    if model_name in ["MLP", "OneDCNN", "EquiOneDCNN"]:
+    if model_name in ["MLP", "OneDCNN", "EquiOneDCNN", "EquiResNet"]:
         alter_channel = False
     else:
         alter_channel = True
