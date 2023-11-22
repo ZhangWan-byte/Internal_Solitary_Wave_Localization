@@ -37,7 +37,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         elif model_name == "ResNet":
             model = get_ResNet(num_blocks=[3,4,6,3], num_classes=17, resolution=(16, 16)).to(device)
         elif model_name == "BoTNet":
-            resnet = get_BoTNet(num_blocks=[3,4,6,3], num_classes=17, resolution=(16, 16), heads=4).to(device)
+            model = get_BoTNet(num_blocks=[3,4,6,3], num_classes=17, resolution=(16, 16), heads=4).to(device)
         elif model_name == "OneDCNN":
             model = OneDCNN(n_channels=64, hidden=128, n_classes=17).to(device)
         elif model_name == "EquiOneDCNN":

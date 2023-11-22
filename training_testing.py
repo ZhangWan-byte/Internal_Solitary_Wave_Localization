@@ -55,23 +55,27 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
                     batch_size=batch_size, lr=lr, epochs=200, model_name=model_name, 
-                    loss_func=loss_func)
+                    loss_func=loss_func
+                )
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
                     model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=200, 
-                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func=loss_func)
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func=loss_func
+                )
 
             elif model_name in ["ResNet", "BoTNet", "OneDCNN", "OneDCNN", "EquiOneDCNN", "EquiResNet", "ConvNeXt"]:
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
                     batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
-                    loss_func=loss_func, pretrain_path=pretrain_path)
+                    loss_func=loss_func, pretrain_path=pretrain_path
+                )
 
                 y_pred = evaluating(
                     history_train_loss, history_val_loss, X_test, y_test, 
                     model_path="./results/{}.pt".format(model_name), batch_size=batch_size, epochs=epoch, 
-                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func=loss_func)
+                    model_name=model_name, is_kfold=True, oversampling=oversampling, i=i, loss_func=loss_func
+                )
 
             elif model_name=="ResNet_pretrain":
                 pass
