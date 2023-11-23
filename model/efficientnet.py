@@ -12,7 +12,7 @@ import torch
 import torch.nn as nn
 import math
 
-__all__ = ['effnetv2_s', 'effnetv2_m', 'effnetv2_l', 'effnetv2_xl']
+# __all__ = ['effnetv2_s', 'effnetv2_m', 'effnetv2_l', 'effnetv2_xl']
 
 
 def _make_divisible(v, divisor, min_value=None):
@@ -167,9 +167,9 @@ class EffNetV2(nn.Module):
                 m.bias.data.zero_()
 
 
-def effnetv2_tiny(**kwargs):
+def effnetv2_ss(**kwargs):
     """
-    Constructs a EfficientNetV2 model in tiny scale
+    Constructs a EfficientNetV2-SS model
     """
     cfgs = [
         # t, c, n, s, SE
