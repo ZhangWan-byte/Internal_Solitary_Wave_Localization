@@ -11,7 +11,7 @@ from loss_func import *
 
 name_list = ["MLP", "OneDCNN", "EquiOneDCNN", "EquiResNet"]
 
-all_model_names = ["MLP", "ResNet", "BoTNet", "OneDCNN", "EquiOneDCNN", "EquiResNet", "ConvNeXt"]
+all_model_names = ["MLP", "ResNet", "BoTNet", "OneDCNN", "EquiOneDCNN", "EquiResNet", "ConvNeXt", "EfficientNetv2"]
 
 def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=400, model_name="MLP", loss_func="CE", gamma=2, input_length=96, dropout=0, path="", pretrain_path=None):
     
@@ -46,6 +46,8 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
             model = RRPlus_M34res(n_channels=48, n_classes=17, eps=2e-5, use_bias=False).to(device)
         elif model_name == "ConvNeXt":
             model = ConvNeXt(in_chans=1, num_classes=17, depths=[3, 3, 9, 3], dims=[96, 192, 384, 768]).to(device)
+        elif model_name == "EfficientNetv2":
+            model = effnetv2_s(num_classes=17)
         else:
             print("something wrong happened!")
             exit()

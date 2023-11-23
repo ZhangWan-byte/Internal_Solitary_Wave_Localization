@@ -36,8 +36,7 @@ class MLP(nn.Module):
         return x
 
 
-# reference
-# https://github.com/leaderj1001/BottleneckTransformers/blob/main/model.py
+# adapted from https://github.com/leaderj1001/BottleneckTransformers/blob/main/model.py
 class MHSA(nn.Module):
     def __init__(self, n_dims, width=14, height=14, heads=4):
         super(MHSA, self).__init__()

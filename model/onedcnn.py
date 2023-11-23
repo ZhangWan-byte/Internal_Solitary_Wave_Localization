@@ -1,3 +1,4 @@
+# adapted from https://github.com/dwromero/wavelet_networks
 import numpy as np
 import matplotlib.pyplot as plt
 
