@@ -47,7 +47,7 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
         elif model_name == "ConvNeXt":
             model = ConvNeXt(in_chans=1, num_classes=17, depths=[3, 3, 9, 3], dims=[96, 192, 384, 768]).to(device)
         elif model_name == "EfficientNetv2":
-            model = effnetv2_s(num_classes=17).to(device)
+            model = effnetv2_tiny(num_classes=17).to(device)
         else:
             print("something wrong happened!")
             exit()

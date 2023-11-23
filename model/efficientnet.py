@@ -167,6 +167,22 @@ class EffNetV2(nn.Module):
                 m.bias.data.zero_()
 
 
+def effnetv2_tiny(**kwargs):
+    """
+    Constructs a EfficientNetV2 model in tiny scale
+    """
+    cfgs = [
+        # t, c, n, s, SE
+        [1,  12,  2, 1, 0],
+        [4,  24,  4, 2, 0],
+        [4,  32,  4, 2, 0],
+        [4, 64,  6, 2, 1],
+        [6, 80,  9, 1, 1],
+        [6, 128, 15, 2, 1],
+    ]
+    return EffNetV2(cfgs, **kwargs)
+
+
 def effnetv2_s(**kwargs):
     """
     Constructs a EfficientNetV2-S model
