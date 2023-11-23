@@ -127,8 +127,8 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 # kfold_training(
 #     model_name="ResNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
 
-kfold_training(
-    model_name="BoTNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
+# kfold_training(
+#     model_name="BoTNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
 
 # kfold_training(
 #     model_name="OneDCNN", oversampling="", data_shape="6x16", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
@@ -142,6 +142,8 @@ kfold_training(
 # kfold_training(
 #     model_name="ConvNeXt", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
+kfold_training(
+    model_name="EfficientNetv2", oversampling="", data_shape="16x16x1", loss_func="CE", lr=3e-4, epoch=400, batch_size=1024)
 
 # 3. Using pre-training
 
