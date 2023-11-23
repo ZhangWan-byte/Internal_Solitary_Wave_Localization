@@ -68,7 +68,7 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
                 "ResNet", "BoTNet", 
                 "OneDCNN", "OneDCNN", 
                 "EquiOneDCNN", "EquiResNet", 
-                "ConvNeXt", "EfficientNetv2"]:
+                "ConvNeXt", "EfficientNet"]:
                 history_train_loss, history_val_loss = training(
                     X_train, y_train, X_test, y_test, 
                     batch_size=batch_size, lr=lr, epochs=epoch, model_name=model_name, 
@@ -147,7 +147,7 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 #     model_name="ConvNeXt", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
 kfold_training(
-    model_name="EfficientNetv2", oversampling="", data_shape="16x16x1", loss_func="CE", lr=6e-5, epoch=400, batch_size=1024)
+    model_name="EfficientNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=6e-5, epoch=400, batch_size=1024)
 
 # 3. Using pre-training
 
