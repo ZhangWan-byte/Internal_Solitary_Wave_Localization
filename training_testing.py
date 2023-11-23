@@ -147,7 +147,7 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 #     model_name="ConvNeXt", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
 kfold_training(
-    model_name="EfficientNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=6e-5, epoch=400, batch_size=1024)
+    model_name="EfficientNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
 # 3. Using pre-training
 
