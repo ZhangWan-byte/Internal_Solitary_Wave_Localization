@@ -54,6 +54,7 @@ def is_south_sea(df):
 
 def global_data_generation(data_path, is_augment=False, only_south_sea=True):
     
+    
     # data loading
     data_inputfilenames = os.listdir(data_path)
     data_li = []
@@ -69,8 +70,8 @@ def global_data_generation(data_path, is_augment=False, only_south_sea=True):
     if is_augment==True:
         data_reverse = np.fliplr(data)
         data = np.hstack([data, data_reverse])
-        label_reverse = np.fliplr(label)
-        label = np.hstack([label, label_reverse])
+        # label_reverse = np.fliplr(label)
+        # label = np.hstack([label, label_reverse])
     
     # data transformation
     data = pd.DataFrame(data)
@@ -109,7 +110,7 @@ def global_data_generation(data_path, is_augment=False, only_south_sea=True):
         
     print(data.shape)
 
-    np.save("./data/global_southSea_data.npy", data)
+    np.save("./data/global_southSea_data_augment.npy", data)
 
     return data
 
@@ -265,17 +266,18 @@ def kfold_load_process_save_data(data_path, label_path, is_augment=False, data_s
 
 
 if __name__ == "__main__":
-    # generating dataset 
-    data_path="./data/Trainingdata_WS_Month_1.0/inputs/"
-    label_path="./data/Trainingdata_WS_Month_1.0/labels/"
+    # 1. generating dataset 
+    # data_path="./data/Trainingdata_WS_Month_1.0/inputs/"
+    # label_path="./data/Trainingdata_WS_Month_1.0/labels/"
 
-    data_shape = ["1x96", "16x16x1", "6x16"]
-    oversampling = ["", "oversample", "SMOTE", "BorderlineSMOTE", "ADASYN"]
+    # data_shape = ["1x96", "16x16x1", "6x16"]
+    # oversampling = ["", "oversample", "SMOTE", "BorderlineSMOTE", "ADASYN"]
 
-    for i in data_shape:
-        for j in oversampling:
-            kfold_load_process_save_data(data_path, label_path, is_augment=False, data_shape=i, oversampling=j, kfold=2, times=5)
+    # for i in data_shape:
+    #     for j in oversampling:
+    #         kfold_load_process_save_data(data_path, label_path, is_augment=False, data_shape=i, oversampling=j, kfold=2, times=5)
 
-    # generating pretraining dataset 
+    # 2. generating pretraining dataset 
     # path_data = "D:/Inner_Wave/version1.0/Testingdata_global_1.0/"
-    # global_data_generation(path_data, is_augment=False, only_south_sea=True)
+    path_data = "./data/Testingdata_global_1.0/Testingdata_global_1.0/"
+    global_data_generation(path_data, is_augment=True, only_south_sea=True)

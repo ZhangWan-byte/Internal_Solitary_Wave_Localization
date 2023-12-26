@@ -27,6 +27,7 @@ from metric import *
 from model import *
 from train_eval import *
 from loss_func import *
+from pretraining import *
 
 warnings.filterwarnings('ignore')
 
@@ -146,9 +147,14 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 # kfold_training(
 #     model_name="ConvNeXt", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
-kfold_training(
-    model_name="EfficientNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
+# kfold_training(
+#     model_name="EfficientNet", oversampling="", data_shape="16x16x1", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024)
 
 # 3. Using pre-training
 
 # kfold_training(model_name="BoTNet", oversampling="", data_shape='16x16x1', loss_func="FocalLoss", lr=6e-4, epoch=400, pretrain_path="./results/SimCLR_BoTNet_southSea_batch1024_proj64_tao100_lr1e-3_10epoch.pt", batch_size=128)
+
+kfold_training(
+    model_name="EquiResNet", oversampling="", data_shape="6x16", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024, 
+    pretrain_path="./models/SimCLR_EquiResNet_batch128_tau0.1_augment1.pt"
+)

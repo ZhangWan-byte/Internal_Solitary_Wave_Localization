@@ -54,8 +54,9 @@ def training(X_train, y_train, X_val, y_val, batch_size=1024, lr=1e-4, epochs=40
             exit()
     else:
         pretrain_model = torch.load(pretrain_path)
-        model = ResNet_simclr(encoder=pretrain_model.encoder, num_classes=17).to(device)
-            
+        # model = ResNet_simclr(encoder=pretrain_model.encoder, num_classes=17).to(device)
+        model = pretrain_model.encoder.to(device)
+
     # loss and optimizer
     if loss_func == "CE":
         criterion = nn.CrossEntropyLoss()
