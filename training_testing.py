@@ -156,5 +156,5 @@ def kfold_training(model_name, kfold=2, times=5, oversampling="", data_shape='1x
 
 kfold_training(
     model_name="EquiResNet", oversampling="", data_shape="6x16", loss_func="CE", lr=1e-4, epoch=400, batch_size=1024, 
-    pretrain_path="./models/SimCLR_EquiResNet_batch128_tau0.1_augment1.pt"
+    pretrain_path="./models/SimCLR_EquiResNet_batch128_tau10.0_augment1.pt"
 )
