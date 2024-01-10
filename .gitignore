@@ -2,3 +2,6 @@ __pycache__/
 data/
 results/
 *.pt
+images.ipynb
+cat_edges.npy
+*.png
